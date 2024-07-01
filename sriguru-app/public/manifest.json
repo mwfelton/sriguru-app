@@ -2,6 +2,7 @@
     "id": "1",
     "name": "SriGuru Kriya App",
     "short_name": "SriGuru App",
+    "description": "A practice support for the Kriya Practice as taught by Sri M",
     "icons": [
       {
         "src": "/icons/icon-192x192.png",
