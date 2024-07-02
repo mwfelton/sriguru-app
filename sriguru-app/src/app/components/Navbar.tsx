@@ -14,7 +14,6 @@ const Navbar = () => {
   }
 
     return (
-      
       <nav className="fixed w-full h-24 shadow-xl bg-teal-400 sm:px-24">
         <div className='flex justify-between items-center h-full w-full px-4 2Xl:px-16'>
           <Link href='/'>
@@ -27,20 +26,27 @@ const Navbar = () => {
             />
           </Link>
           <div className="flex items-center">
-          <ul className="hidden sm:flex">
-            <Link href='/'>
+          <ul className="hidden md:flex">
+            <Link href='/pages/learn-online'>
               <li className="ml-10 uppercase hover:border-b text-xl">
-                Banana
+                Learn
               </li>
             </Link>
-            <Link href='/'>
+            <Link href='/pages/practice-tracker'>
               <li className="ml-10 uppercase hover:border-b text-xl">
-                BUMS
+                Practice Tracker
+              </li>
+            </Link>
+            <Link href='/pages/practice-timer'>
+              <li className="ml-10 uppercase hover:border-b text-xl">
+                Kriya Timer
               </li>
             </Link>
           </ul>
-          <div onClick={handleNav} className="cursor-pointer pl-10">
+          <div className="cursor-pointer pl-10">
+            <Link href='/pages/user-page'>
             <FaRegCircleUser size={40} />
+            </Link>
           </div>
         </div>
       </div>
