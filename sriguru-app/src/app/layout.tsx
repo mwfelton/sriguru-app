@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Sen } from "next/font/google";
 import "./globals.css";
 import Navbar from './components/Navbar'
 
-const inter = Inter({ subsets: ["latin"] });
-
+const sen = Sen({ 
+  subsets: ["latin"],
+  weight: ['400', '700', '800'] // Specify the weights you need
+});
 export const metadata: Metadata = {
   manifest: "/manifest.json",
   title: "Create Next App",
@@ -35,9 +37,9 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </head>
-      <body className={inter.className}>
+      <body className={sen.className}>
         <Navbar />
-        <main>
+        <main className="pt-24">
          {children}
         </main>
       </body>
