@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import Logo from '../../../public/icons/icon-384x384.png'
+import Logo from '../../../public/images/nav-logo.png'
 import React, { useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 
@@ -14,13 +14,13 @@ const Navbar = () => {
   }
 
     return (
-      <nav className="fixed w-full h-24 shadow-xl bg-teal-400 sm:px-24">
+      <nav className="fixed w-full h-24 shadow-xl bg-crystal_blue sm:px-24">
         <div className='flex justify-between items-center h-full w-full px-4 2Xl:px-16'>
           <Link href='/'>
             <Image
               src={Logo}
               alt='logo'
-              height="85"
+              height="60"
               className="cursor-pointer"
               priority
             />
@@ -45,7 +45,7 @@ const Navbar = () => {
           </ul>
           <div className="cursor-pointer pl-10">
             <Link href='/pages/user-page'>
-            <FaRegCircleUser size={40} />
+            <FaRegCircleUser size={40} className="text-seashell" />
             </Link>
           </div>
         </div>

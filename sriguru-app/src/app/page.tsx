@@ -6,67 +6,63 @@ import KriyaTimerImage from '../../public/images/kriya-timer.png'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center">
-      <h1>Home page</h1>
-
-    <div className="px-2">
-      <div className='w-full text-white md:h-screen text-center md:text-left'>
-        <div className='max-w-screen-lg p-12 mx-auto flex flex-col justify-center w-full h-full'>
-          <div className='grid sm:grid-cols-1 md:grid-cols-3 gap-8 sm:px-5'>
-
-                      {/* card itself */}
-            <Link href={'/pages/practice-timer'}>
-              <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
-                <Image
-                  src={KriyaTimerImage}
-                  alt='logo'
-                  className="cursor-pointer"
-                  priority
-                />
-                <div className='flex items-center justify-center bg-teal-400'>
-                  <button className='px-2 m-4'>
-                    Kriya practice guide
-                  </button>
+    <main className="flex min-h-screen flex-col items-center bg-platinum">
+      <div className="px-2">
+        <div className='w-full text-white md:h-screen text-center md:text-left'>
+          <div className='max-w-screen-lg px-12 py-5 mx-auto flex flex-col justify-center w-full h-full'>
+            <div className='grid sm:grid-cols-1 md:grid-cols-3 gap-8 sm:px-5'>
+              {/* card itself */}
+              <Link href={'/pages/practice-timer'}>
+                <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
+                  <Image
+                    src={KriyaTimerImage}
+                    alt='logo'
+                    className="cursor-pointer"
+                    priority
+                  />
+                  <div className='flex items-center justify-center bg-crystal_blue'>
+                    <button className='px-2 m-4 text-seashell'>
+                      Kriya practice guide
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </Link>
-
-            <Link href={'/pages/practice-tracker'}>
-              <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
-                <Image
-                  src={TrackerImage}
-                  alt='logo'
-                  className="cursor-pointer"
-                  priority
-                />
-                <div className='flex items-center justify-center bg-teal-400'>
-                  <button className='px-2 m-4'>
-                    Track your Sadhana
-                  </button>
+              </Link>
+              {/* card itself */}
+              <Link href={'/pages/practice-tracker'}>
+                <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
+                  <Image
+                    src={TrackerImage}
+                    alt='logo'
+                    className="cursor-pointer"
+                    priority
+                  />
+                  <div className='flex items-center justify-center bg-crystal_blue'>
+                    <button className='px-2 m-4 text-seashell'>
+                      Track your Sadhana
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </Link>
-
-            <Link href={'/pages/learn-online'}>
-              <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
-                <Image
-                  src={LearnYogaImage}
-                  alt='logo'
-                  className="cursor-pointer"
-                  priority
-                />
-                <div className='flex items-center justify-center bg-teal-400'>
-                  <button className='px-2 m-4'>
-                    Learn practices online
-                  </button>
+              </Link>
+              {/* card itself */}
+              <Link href={'/pages/learn-online'}>
+                <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
+                  <Image
+                    src={LearnYogaImage}
+                    alt='logo'
+                    className="cursor-pointer"
+                    priority
+                  />
+                  <div className='flex items-center justify-center bg-crystal_blue'>
+                    <button className='px-2 m-4 text-seashell'>
+                      Learn practices online
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </Link>
-            
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </div>    
+      </div>    
   </main>
   );
 }
