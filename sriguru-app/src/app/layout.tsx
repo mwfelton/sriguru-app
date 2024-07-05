@@ -39,7 +39,7 @@ export default function RootLayout({
       </head>
       <body className={sen.className}>
         <Navbar />
-        <main className="pt-24">
+        <main className="pt-24 bg-platinum">
          {children}
         </main>
       </body>

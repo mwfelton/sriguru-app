@@ -6,7 +6,7 @@ import KriyaTimerImage from '../../public/images/kriya-timer.png'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center bg-platinum">
+    <main className="flex min-h-screen flex-col items-center">
       <div className="px-2">
         <div className='w-full text-white md:h-screen text-center md:text-left'>
           <div className='max-w-screen-lg px-12 py-5 mx-auto flex flex-col justify-center w-full h-full'>
