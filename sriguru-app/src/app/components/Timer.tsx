@@ -82,31 +82,32 @@ const Timer = ({ duration, setActiveCountdown, setResetActiveCountdown }: TimerP
   };
 
   const renderTimerController = () => {
-    const startOrPauseIcon = isTimerRunning ? <CiPause1 size={50}/> : <IoPlayOutline size={50}/>;
+    const startOrPauseIcon = isTimerRunning ? <CiPause1 size={20}/> : <IoPlayOutline size={25}/>;
     const startOrPauseAltText = isTimerRunning ? 'pause icon' : 'play icon';
     return (
       <div className="flex items-center">
         <button
-          className="flex items-center px-4 py-3 "
+          className="flex justify-center items-center h-12"
           onClick={onStartOrPauseTimer}
           type="button"
-        >
+          >
           <span className="mr-2" aria-label={startOrPauseAltText}>
             {startOrPauseIcon}
           </span>
 
-          <p className="text-lg">{isTimerRunning ? 'Pause' : 'Start'}</p>
+          <p className="text-5">{isTimerRunning ? 'Pause' : 'Start'}</p>
         </button>
+
         <button
-          className="flex items-center px-4 py-3"
+          className="flex items-center ml-5"
           onClick={onResetTimer}
           type="button"
         >
           <span className="mr-2">
-            <GrPowerReset size={40}/>
+            <GrPowerReset size={20}/>
           </span>
          
-          <p className="text-lg">Reset</p>
+          <p className="text-5">Reset</p>
         </button>
       </div>
     );
@@ -114,11 +115,10 @@ const Timer = ({ duration, setActiveCountdown, setResetActiveCountdown }: TimerP
 
   return (
     <>
-    <div className="flex ">
+    <div className="w-full flex ">
       {renderTimerController()}
-      <div className="flex w-full justify-end items-center text-4xl font-mono px-6">{getElapsedSecondsInTimeFormat()}</div>
+      <div className="flex w-full justify-end items-center text-2xl font-mono">{getElapsedSecondsInTimeFormat()}</div>
       {/* <p className="text-lg">{isTimerRunning ? 'Running' : 'Paused'}</p> */}
-      
     </div>
     </>
   );

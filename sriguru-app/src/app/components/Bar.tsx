@@ -99,7 +99,7 @@ const Bar = ({ activeCountdown, resetActiveCountdown }: BarProps) => {
   };
 
   return (
-    <main className="flex w-full min-h-screen flex-col items-center  bg-pale_pink">
+    <main className="flex min-h-screen flex-col items-center bg-pale_pink">
       {elementsWithCumulativeTime.map((element, index) => (
         <div
           key={index}

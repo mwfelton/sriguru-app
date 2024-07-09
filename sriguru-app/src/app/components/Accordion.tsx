@@ -11,8 +11,8 @@ const Accordion = ({buttonTitle, firstDropDown, secondDropDown}:{[key:string]:an
   const [secondaryAccordionOpen, setSecondaryAccordionOpen] = useState(false)
 
   return (
-    <div className='w-full'>
-        <button onClick={() => setAccordionOpen(!accordionOpen)} className='w-full md:w-1/2 bg-opal text-white py-4 px-4 border-b-4 border-crystal_blue hover:border-seashell rounded'>
+    <div className='w-full md:w-1/2 pb-8'>
+        <button onClick={() => setAccordionOpen(!accordionOpen)} className='h-16 flex justify-between items-center w-full bg-opal text-white py-4 px-10 border-b-4 border-crystal_blue hover:border-seashell rounded'>
           <span>{buttonTitle}</span>
           {accordionOpen ? <span><MdOutlineKeyboardArrowUp /></span> : <span><MdOutlineKeyboardArrowDown /></span>}
         </button>
@@ -23,10 +23,10 @@ const Accordion = ({buttonTitle, firstDropDown, secondDropDown}:{[key:string]:an
             : 'grid-rows-[0fr] opacity-0'
             }`}
             >
-            <div className='overflow-hidden'>{firstDropDown}</div>
+            <div className='w-full overflow-hidden h-16 flex items-center px-5'>{firstDropDown}</div>
 
             {/* <div className='overflow-hidden'>View The Steps</div> */}
-            <button onClick={() => setSecondaryAccordionOpen(!secondaryAccordionOpen)} className='w-full md:w-1/2 bg-opal text-white py-4 px-4 border-b-4 border-crystal_blue hover:border-seashell rounded'>
+            <button onClick={() => setSecondaryAccordionOpen(!secondaryAccordionOpen)} className='h-16 flex justify-between items-center w-full bg-opal text-white py-4 px-10 border-b-4 border-crystal_blue hover:border-seashell rounded'>
                 <span>View the steps</span>
                 {secondaryAccordionOpen ? <span><MdOutlineKeyboardArrowUp /></span> : <span><MdOutlineKeyboardArrowDown /></span>}
             </button>
