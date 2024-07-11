@@ -1,9 +1,9 @@
 "use client"
 import React, { useState } from 'react';
 import Timer from "../../components/Timer";
-import Timer2 from "../../components/Timer2";
+// import Timer2 from "../../components/Timer2";
 import Accordion from "../../components/Accordion";
-import Accordion2 from "../../components/Accordion2";
+// import Accordion2 from "../../components/Accordion2";
 
 import Bar from "../../components/Bar";
 import Image from "next/image";
