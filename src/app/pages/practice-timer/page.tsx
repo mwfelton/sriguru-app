@@ -78,7 +78,7 @@ export default function PracticeTimer() {
         />
       )}
 
-{startKriya && (
+{/* {startKriya && (
         <Accordion2 
           buttonTitle="egger"
           firstDropDown={<Timer2 
@@ -93,7 +93,7 @@ export default function PracticeTimer() {
             />
           }
         />
-      )}
+      )} */}
     </main>
   );
 }
