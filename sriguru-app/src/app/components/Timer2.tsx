@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
 import { IoPlayOutline } from "react-icons/io5";
 import { CiPause1 } from "react-icons/ci";
 import { GrPowerReset } from "react-icons/gr";
@@ -7,14 +6,13 @@ import { GrPowerReset } from "react-icons/gr";
 interface TimerProps {
   duration: number;
   setActiveCountdown: React.Dispatch<React.SetStateAction<number>>
-  setResetActiveCountdown: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Timer = ({ duration, setActiveCountdown, setResetActiveCountdown }: TimerProps) => {
-  console.log(duration)
+const Timer2 = () => {
+
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [timeElapsedInSeconds, setTimeElapsedInSeconds] = useState(0);
-  const [timerLimitInMinutes, setTimerLimitInMinutes] = useState(duration);
+  const [timerLimitInMinutes, setTimerLimitInMinutes] = useState(25);
 
   const intervalId = useRef<number | null>(null);
   setActiveCountdown(timeElapsedInSeconds)
@@ -122,4 +120,4 @@ const Timer = ({ duration, setActiveCountdown, setResetActiveCountdown }: TimerP
   );
 };
 
-export default Timer;
+export default Timer2;

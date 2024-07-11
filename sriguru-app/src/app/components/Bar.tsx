@@ -3,25 +3,25 @@ import { PiFlowerLotusLight } from "react-icons/pi";
 import { useState, useEffect } from "react";
 
 const elements = [
-  { name: "Sri Guru Mantra", time: 5 }, // 5 mins
-  { name: "Sit Quietly", time: 120 }, // 2 mins
-  { name: "Vishuddhi Kriya & Nabi Kriya", time: 240 }, // 4 mins
-  { name: "Sit Quietly", time: 120 }, // 2 mins
-  { name: "Maha Mudra", time: 360 }, // 6 mins
-  { name: "Sit Quietly", time: 120 }, // 2 mins
-  { name: "Central Kriya Pranayam", time: 720 }, // 12 mins
-  { name: "Sit Quietly", time: 120 }, // 2 mins
-  { name: "Bumble Bee", time: 300 }, // 5 mins
-  { name: "Sit Quietly", time: 120 }, // 2 mins
-  { name: "Chakra Dharana", time: 360 }, // 6 mins
-  { name: "Sit Quietly", time: 120 }, // 2 mins
-  { name: "Bhastrika Kriya", time: 180 }, // 3 mins
-  { name: "Sit Quietly", time: 300 }, // 5 mins
+  { name: "Sri Guru Mantra", seconds: 300, minutes: "5:00", customisable: false},
+  { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+  { name: "Vishuddhi & Nabi Kriya", seconds: 120, minutes: "2:00", customisable: true },
+  { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+  { name: "Maha Mudra", seconds: 360, minutes: "6:00", customisable: true },
+  { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+  { name: "Central Kriya Pranayam", seconds: 600, minutes: "10:00", customisable: false },
+  { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+  { name: "Bumble Bee", seconds: 240, minutes: "4:00", customisable: true },
+  { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+  { name: "Chakra Dharana", seconds: 180, minutes: "3:00", customisable: true },
+  { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+  { name: "Bhastrika Kriya", seconds: 180, minutes: "3:00", customisable: true },
+  { name: "Sit Quietly", seconds: 300, minutes: "5:00", customisable: true },
 ];
 
 let cumulativeTime = 0;
 const elementsWithCumulativeTime = elements.map((element) => {
-  cumulativeTime += element.time;
+  cumulativeTime += element.seconds;
   return { ...element, cumulativeTime };
 });
 
@@ -99,24 +99,32 @@ const Bar = ({ activeCountdown, resetActiveCountdown }: BarProps) => {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-pale_pink">
+    <main className="flex min-h-screen flex-col items-center bg-seashell">
       {elementsWithCumulativeTime.map((element, index) => (
         <div
           key={index}
-          data-time={element.time}
-          className={`flex items-center w-full py-2 px-4 ${
-            index <= activeElementIndex ? "bg-active" : "bg-seashell"
-          }`}
+          data-time={element.seconds}
+          className={`flex items-center w-full py-2 px-4`}
         >
-          <div className="flex flex-col items-center justify-center w-12 h-12 rounded-full bg-opal mr-8 ml-2">
+          
+          <div className={`flex items-center justify-center w-12 h-12 rounded-full mr-4 ml-2 transition-all duration-300 ease-in-out ${
+            index <= activeElementIndex ? "bg-cherry_blossom" : "bg-opal"
+          }`}>
             <PiFlowerLotusLight size={35} />
           </div>
           <p>{element.name}</p>
-          <div className="line"></div>
+        
+          <div className="flex ml-auto">
+            <button>-</button>
+            <p className="mx-2">{element.minutes}</p>
+            <button>+</button>
+          </div>
+
+    
         </div>
       ))}
 
-      <button
+      {/* <button
         id="prev"
         className="btn bg-pink-500 text-aqua-500 rounded-md px-6 py-2 m-2 text-sm"
         onClick={prevStep}
@@ -131,9 +139,155 @@ const Bar = ({ activeCountdown, resetActiveCountdown }: BarProps) => {
         disabled={currentActive === steps}
       >
         Next
-      </button>
+      </button> */}
     </main>
   );
 };
 
 export default Bar;
+
+
+// import React from "react";
+// import { PiFlowerLotusLight } from "react-icons/pi";
+// import { useState, useEffect } from "react";
+
+// const elements = [
+//   { name: "Sri Guru Mantra", seconds: 300, minutes: "5:00", customisable: false},
+//   { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+//   { name: "Vishuddhi Kriya & Nabi Kriya", seconds: 120, minutes: "2:00", customisable: true },
+//   { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+//   { name: "Maha Mudra", seconds: 360, minutes: "6:00", customisable: true },
+//   { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+//   { name: "Central Kriya Pranayam", seconds: 600, minutes: "10:00", customisable: false },
+//   { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+//   { name: "Bumble Bee", seconds: 240, minutes: "4:00", customisable: true },
+//   { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+//   { name: "Chakra Dharana", seconds: 180, minutes: "3:00", customisable: true },
+//   { name: "Sit Quietly", seconds: 120, minutes: "2:00", customisable: true },
+//   { name: "Bhastrika Kriya", seconds: 180, minutes: "3:00", customisable: true },
+//   { name: "Sit Quietly", seconds: 300, minutes: "5:00", customisable: true },
+// ];
+
+
+// let cumulativeTime = 0;
+// const elementsWithCumulativeTime = elements.map((element) => {
+//   cumulativeTime += element.seconds;
+//   return { ...element, cumulativeTime };
+// });
+
+// interface BarProps {
+//   activeCountdown: number;
+//   resetActiveCountdown: boolean;
+// }
+
+// const Bar = ({ activeCountdown, resetActiveCountdown }: BarProps) => {
+//   const getActiveElementIndex = () => {
+//     const adjustedCountdown = activeCountdown - 1; // Account for 1-second delay
+//     if (adjustedCountdown < 0) return -1; // If activeCountdown is less than 1 second, no element should be active
+
+//     for (let i = 0; i < elementsWithCumulativeTime.length; i++) {
+//       if (adjustedCountdown < elementsWithCumulativeTime[i].cumulativeTime) {
+//         return i;
+//       }
+//     }
+//     return elementsWithCumulativeTime.length - 1;
+//   };
+
+//   const activeElementIndex = getActiveElementIndex();
+
+//   console.log("piss lips", activeCountdown);
+
+//   const [currentActive, setCurrentActive] = useState(1);
+//   const steps = 3;
+
+//   useEffect(() => {
+//     const updateProgress = () => {
+//       const progress = document.getElementById("progress");
+//       const circles = document.querySelectorAll(".circle");
+
+//       circles.forEach(
+//         (circle, idx) => {
+//           if (idx < currentActive) {
+//             circle.classList.add("active");
+//           } else {
+//             circle.classList.remove("active");
+//           }
+//         },
+//         [currentActive]
+//       );
+
+//       const actives = document.querySelectorAll(".active");
+//       if (progress) {
+//         progress.style.width =
+//           ((actives.length - 1) / (circles.length - 1)) * 100 + "%";
+//       }
+
+//       const prevButton = document.getElementById("prev") as HTMLButtonElement;
+//       const nextButton = document.getElementById("next") as HTMLButtonElement;
+
+//       if (prevButton && nextButton) {
+//         if (currentActive === 1) {
+//           prevButton.disabled = true;
+//         } else if (currentActive === circles.length) {
+//           nextButton.disabled = true;
+//         } else {
+//           prevButton.disabled = false;
+//           nextButton.disabled = false;
+//         }
+//       }
+//     };
+
+//     updateProgress();
+//   }, [currentActive]);
+
+//   const nextStep = () => {
+//     setCurrentActive((prev) => Math.min(prev + 1, steps));
+//   };
+
+//   const prevStep = () => {
+//     setCurrentActive((prev) => Math.max(prev - 1, 1));
+//   };
+
+//   return (
+//     <main className="flex min-h-screen flex-col items-center bg-seashell">
+//       {elementsWithCumulativeTime.map((element, index) => (
+//         <div
+//           key={index}
+//           data-time={element.seconds}
+//           className={`flex items-center w-full py-2 px-4`}
+//         >
+//           {/* <div className={`flex flex-col items-center justify-center w-12 h-12 rounded-full mr-8 ml-2 ${
+//             index <= activeElementIndex ? "bg-cherry_blossom" : "bg-opal"
+//           }`}> */}
+//           <div className={`flex flex-col items-center justify-center w-12 h-12 rounded-full mr-8 ml-2 transition-all duration-300 ease-in-out ${
+//             index <= activeElementIndex ? "bg-cherry_blossom" : "bg-opal"
+//           }`}>
+//             <PiFlowerLotusLight size={35} />
+//           </div>
+//           <p>{element.name}</p>
+//           <p>{element.minutes}</p>
+//           <div className="line"></div>
+//         </div>
+//       ))}
+
+//       {/* <button
+//         id="prev"
+//         className="btn bg-pink-500 text-aqua-500 rounded-md px-6 py-2 m-2 text-sm"
+//         onClick={prevStep}
+//         disabled={currentActive === 1}
+//       >
+//         Prev
+//       </button>
+//       <button
+//         id="next"
+//         className="btn bg-pink-500 text-aqua-500 rounded-md px-6 py-2 m-2 text-sm"
+//         onClick={nextStep}
+//         disabled={currentActive === steps}
+//       >
+//         Next
+//       </button> */}
+//     </main>
+//   );
+// };
+
+// export default Bar;
