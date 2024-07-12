@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import Timer from "../../components/Timer";
-// import Timer2 from "../../components/Timer2";
+import SuperTimer from "../../components/SuperTimer";
 import Accordion from "../../components/Accordion";
 // import Accordion2 from "../../components/Accordion2";
 
@@ -43,6 +43,12 @@ export default function PracticeTimer() {
         </button>
       </div>
 
+      
+
+      {startKriya && (
+       <SuperTimer />
+      )}
+
       {/* DUMMMY
       <div className='flex flex-col w-full overflow-hidden flex items-center bg-cherry_blossom rounded mb-20'>
       <Timer 
@@ -77,23 +83,6 @@ export default function PracticeTimer() {
           }
         />
       )}
-
-{/* {startKriya && (
-        <Accordion2 
-          buttonTitle="egger"
-          firstDropDown={<Timer2 
-            duration={58}
-            setActiveCountdown={setActiveCountdown}
-            setResetActiveCountdown={setResetActiveCountdown}
-          />}
-          secondDropDown={
-            <Bar 
-              activeCountdown={activeCountdown}
-              resetActiveCountdown={resetActiveCountdown}
-            />
-          }
-        />
-      )} */}
     </main>
   );
 }
