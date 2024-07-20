@@ -4,25 +4,25 @@ import CardImage from '../../../public/images/Untitled design.png';
 import ProgressBar from '../components/ProgressBar';
 import data from '../kriya.json';
 
-interface TimerCardsProps {
-  activeCountdown: number;
-  resetActiveCountdown: () => void;
-}
-
-const TimerCards: React.FC<TimerCardsProps> = ({ activeCountdown, resetActiveCountdown }) => {
+const TimerCards: React.FC<{ activeCountdown: number; resetActiveCountdown: boolean }> = ({ activeCountdown, resetActiveCountdown }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [totalDuration, setTotalDuration] = useState(0);
 
   useEffect(() => {
     // Calculate the total duration of the current card
     if (data[currentIndex]) {
-      if (activeCountdown >= data[currentIndex].seconds) {
-        if (currentIndex < data.length - 1) {
-          setCurrentIndex(currentIndex + 1);
-          resetActiveCountdown();
-        }
+      setTotalDuration(data[currentIndex].seconds);
+    }
+  }, [currentIndex]);
+
+  useEffect(() => {
+    // Determine if the current card's timer is done with a small buffer
+    if (data[currentIndex] && activeCountdown >= data[currentIndex].seconds + 1) { // 1 second buffer
+      if (currentIndex < data.length - 1) {
+        setCurrentIndex(currentIndex + 1);
       }
     }
-  }, [activeCountdown, currentIndex, resetActiveCountdown]);
+  }, [activeCountdown, currentIndex]);
 
   return (
     <>

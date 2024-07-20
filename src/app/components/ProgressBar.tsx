@@ -7,13 +7,17 @@ interface ProgressBarProps {
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ totalDuration, elapsedTime }) => {
   const percentage = (elapsedTime / totalDuration) * 100;
+  const durationMs = totalDuration * 1000;
 
   return (
     <div className='my-20'>
       <div className='bg-crystal_blue/20 h-4 rounded-full overflow-hidden'>
         <div
-          className='bg-crystal_blue h-full'
-          style={{ width: `${percentage}%` }}
+          className='bg-crystal_blue h-full transition-all ease-linear'
+          style={{ 
+            width: `${percentage}%`, 
+            transitionDuration: `${durationMs}ms` 
+          }}
         >
           {/* Remove text content to hide numbers */}
         </div>
