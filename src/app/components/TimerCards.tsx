@@ -6,18 +6,9 @@ import data from '../kriya.json';
 
 const TimerCards: React.FC<{ activeCountdown: number; resetActiveCountdown: boolean }> = ({ activeCountdown, resetActiveCountdown }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [totalDuration, setTotalDuration] = useState(0);
 
   useEffect(() => {
-    // Calculate the total duration of the current card
-    if (data[currentIndex]) {
-      setTotalDuration(data[currentIndex].seconds);
-    }
-  }, [currentIndex]);
-
-  useEffect(() => {
-    // Determine if the current card's timer is done with a small buffer
-    if (data[currentIndex] && activeCountdown >= data[currentIndex].seconds + 1) { // 1 second buffer
+    if (data[currentIndex] && activeCountdown >= data[currentIndex].seconds) {
       if (currentIndex < data.length - 1) {
         setCurrentIndex(currentIndex + 1);
       }
