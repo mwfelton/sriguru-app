@@ -1,39 +1,38 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
-import Timer from "../../components/Timer";
-import Accordion from "../../components/Accordion";
-import Bar from "../../components/Bar";
 import TimerCards from "../../components/TimerCards";
 import Image from "next/image";
 import KriyaTimerHero from '../../../../public/images/kriya-timer-hero.png';
-import data from '../../kriya.json';
 
 export default function PracticeTimer() {
   const [activeCountdown, setActiveCountdown] = useState(0);
   const [resetActiveCountdown, setResetActiveCountdown] = useState(false);
   const [startKriya, setStartKriya] = useState(false);
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
   const handleStartKriya = () => {
     setStartKriya(!startKriya); // Toggle startKriya state
   };
 
   useEffect(() => {
-    if (activeCountdown >= 0) {
-      const totalDuration = data.reduce((acc, card) => acc + card.seconds, 0);
-      if (activeCountdown >= totalDuration) {
-        setCurrentCardIndex((prevIndex) => {
-          if (prevIndex < data.length - 1) {
-            return prevIndex + 1;
-          } else {
-            // Reset or finish the process
-            setStartKriya(false);
-            return 0;
-          }
-        });
-      }
+    let intervalId: NodeJS.Timeout | null = null;
+
+    if (startKriya) {
+      intervalId = setInterval(() => {
+        setActiveCountdown(prev => prev + 1);
+      }, 1000);
+
+      return () => {
+        if (intervalId) clearInterval(intervalId);
+      };
     }
-  }, [activeCountdown]);
+  }, [startKriya]);
+
+  useEffect(() => {
+    if (resetActiveCountdown) {
+      setActiveCountdown(0);
+      setResetActiveCountdown(false);
+    }
+  }, [resetActiveCountdown]);
 
   return (
     <main className="flex min-h-screen flex-col items-center px-12 py-5">
@@ -51,54 +50,23 @@ export default function PracticeTimer() {
         </>
       )}
 
-      {/* Start Button */}
       {!startKriya && (
         <div className='flex w-full flex-col items-center bg-crystal_blue rounded my-4'>
           <button 
             className='px-4 py-2 m-2 text-seashell text-center'
             onClick={handleStartKriya}
           >
-            Start your Kriya egg
+            Start your Kriya
           </button>
         </div>
       )}
 
-      {/* Manage Button */}
-      {!startKriya && (
-        <div className='flex w-full flex-col items-center bg-crystal_blue rounded my-4'>
-          <button 
-            className='px-4 py-2 m-2 text-seashell text-center'
-            onClick={handleStartKriya}
-          >
-           Manage your Kriya
-          </button>
-        </div>
-      )}
-
-      
-      {/* TimerCards */}
       {startKriya && (
-        <TimerCards currentCardIndex={currentCardIndex} />
+        <TimerCards
+          activeCountdown={activeCountdown}
+          resetActiveCountdown={resetActiveCountdown}
+        />
       )}
     </main>
   );
 }
-
-
-// {/* Accordion and Timer */}
-// {startKriya && (
-//   <Accordion 
-//     buttonTitle="Full Kriya Practice"
-//     firstDropDown={<Timer 
-//       duration={data[currentCardIndex].seconds}
-//       setActiveCountdown={setActiveCountdown}
-//       setResetActiveCountdown={setResetActiveCountdown}
-//     />}
-//     secondDropDown={
-//       <Bar 
-//         activeCountdown={activeCountdown}
-//         resetActiveCountdown={resetActiveCountdown}
-//       />
-//     }
-//   />
-// )}

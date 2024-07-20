@@ -1,41 +1,47 @@
-import React from 'react';
-import Image from "next/image";
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import CardImage from '../../../public/images/Untitled design.png';
 import ProgressBar from '../components/ProgressBar';
 import data from '../kriya.json';
 
-interface TimerCardsProps {
-  currentCardIndex: number;
-}
+const TimerCards: React.FC<{ activeCountdown: number; resetActiveCountdown: boolean }> = ({ activeCountdown, resetActiveCountdown }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [totalDuration, setTotalDuration] = useState(0);
 
-const TimerCards = ({ currentCardIndex }: TimerCardsProps) => {
-  const card = data[currentCardIndex];
+  useEffect(() => {
+    // Calculate the total duration of the current card
+    if (data[currentIndex]) {
+      setTotalDuration(data[currentIndex].seconds);
+    }
+  }, [currentIndex]);
+
+  useEffect(() => {
+    // Determine if the current card's timer is done
+    if (data[currentIndex] && activeCountdown >= data[currentIndex].seconds) {
+      if (currentIndex < data.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+      }
+    }
+  }, [activeCountdown, currentIndex]);
 
   return (
     <>
-      <div key={currentCardIndex} className="max-w-sm rounded overflow-hidden shadow-lg my-4">
-        <Image
-          src={CardImage}
-          alt='hero image for kriya practice page'
-          width={500} height={300}
-        />
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{card.name}</div>
-          <div className="font-bold text-xl mb-2">Progress Bar</div>
-          <ProgressBar minutes={card.minutes} seconds={card.seconds} />
+      {data[currentIndex] && (
+        <div key={currentIndex} className="max-w-sm rounded overflow-hidden shadow-lg my-4">
+          <Image
+            src={CardImage}
+            alt='hero image for kriya practice page'
+            width={500} height={300} // You can adjust width and height as needed
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">{data[currentIndex].name}</div>
+            <ProgressBar
+              totalDuration={data[currentIndex].seconds}
+              elapsedTime={activeCountdown}
+            />
+          </div>
         </div>
-      </div>
-
-      <div className='flex w-full flex-col items-center bg-crystal_blue rounded my-4'>
-        <button className='px-4 py-2 m-2 text-seashell text-center'>
-          Pause Kriya
-        </button>
-      </div>
-      <div className='flex w-full flex-col items-center bg-crystal_blue rounded my-4'>
-        <button className='px-4 py-2 m-2 text-seashell text-center'>
-          Finish Kriya
-        </button>
-      </div>
+      )}
     </>
   );
 }
