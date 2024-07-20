@@ -6,7 +6,6 @@ import KriyaTimerHero from '../../../../public/images/kriya-timer-hero.png';
 
 export default function PracticeTimer() {
   const [activeCountdown, setActiveCountdown] = useState(0);
-  const [resetActiveCountdown, setResetActiveCountdown] = useState(false);
   const [startKriya, setStartKriya] = useState(false);
 
   const handleStartKriya = () => {
@@ -27,12 +26,9 @@ export default function PracticeTimer() {
     }
   }, [startKriya]);
 
-  useEffect(() => {
-    if (resetActiveCountdown) {
-      setActiveCountdown(0);
-      setResetActiveCountdown(false);
-    }
-  }, [resetActiveCountdown]);
+  const resetActiveCountdown = () => {
+    setActiveCountdown(0);
+  };
 
   return (
     <main className="flex min-h-screen flex-col items-center px-12 py-5">
