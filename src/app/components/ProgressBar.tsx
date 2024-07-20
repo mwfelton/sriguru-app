@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface ProgressBarProps {
   minutes: string;
@@ -6,13 +6,25 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ minutes, seconds }) => {
-  const totalSeconds = parseInt(minutes.split(":")[0]) * 60 + parseInt(minutes.split(":")[1]);
-  const percentage = (seconds / totalSeconds) * 100;
+  const [percentage, setPercentage] = useState(0);
+
+  useEffect(() => {
+    const totalMinutes = parseInt(minutes.split(":")[0]);
+    const totalSeconds = totalMinutes * 60 + parseInt(minutes.split(":")[1]);
+
+    const updatePercentage = () => {
+      const elapsedSeconds = totalSeconds - seconds;
+      const newPercentage = (elapsedSeconds / totalSeconds) * 100;
+      setPercentage(newPercentage);
+    };
+
+    updatePercentage();
+  }, [minutes, seconds]);
 
   return (
     <div className='my-20'>
       <h1 className='text-2xl md:text-5xl uppercase text-crystal_blue font-extrabold animate-pulse mt-20 my-10'>
-        Progress bar in Tailwind CSS
+        Progress Bar in Tailwind CSS
       </h1>
 
       <div>
@@ -21,12 +33,12 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ minutes, seconds }) => {
             className='bg-crystal_blue flex justify-center items-center h-full text-xs text-white font-bold'
             style={{ width: `${percentage}%` }}
           >
-            {percentage.toFixed(2)}%
+            {/* {percentage.toFixed(2)}% */}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default ProgressBar;
