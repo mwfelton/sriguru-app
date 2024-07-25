@@ -18,7 +18,6 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ totalDuration, elapsedTime })
             transitionDuration: '1000ms' // Smooth transition every second
           }}
         >
-          {/* Remove text content to hide numbers */}
         </div>
       </div>
     </div>

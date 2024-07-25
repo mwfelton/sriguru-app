@@ -1,104 +1,100 @@
 [
-    {
-      "name": "Sri Guru Mantra",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": "5:00",
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Sit Quietly",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Vishuddhi & Nabi Kriya",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Sit Quietly",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Maha Mudra",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Sit Quietly",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Central Kriya Pranayam",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": "10:00",
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Sit Quietly",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Bumble Bee",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Sit Quietly",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Chakra Dharana",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Sit Quietly",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Bhastrika Kriya",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    },
-    {
-      "name": "Sit Quietly",
-      "seconds": 5,
-      "minutes": "0:05",
-      "minimum_value": null,
-      "image": "../../../public/images/Untitled design.png"
-    }
+  {
+    "name": "Sri Guru Mantra",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": "5:00",
+    "image": "/images/guru-mantra.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Vishuddhi & Nabi Kriya",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/vis-nabi.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Maha Mudra",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/mahamudra.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Central Kriya Pranayam",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": "10:00",
+    "image": "/images/central-kriya.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Bumble Bee",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/bumble.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Chakra Dharana",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/chakra-d.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Bhastrika Kriya",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/bhastrika.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 5,
+    "minutes": "0:05",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  }
 ]
-
-
-
-  

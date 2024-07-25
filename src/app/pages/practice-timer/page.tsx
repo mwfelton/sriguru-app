@@ -14,7 +14,6 @@ export default function PracticeTimer() {
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null;
-
     if (startKriya) {
       intervalId = setInterval(() => {
         setActiveCountdown(prev => prev + 1);
