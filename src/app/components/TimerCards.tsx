@@ -8,7 +8,7 @@ const TimerCards: React.FC<{ activeCountdown: number; resetActiveCountdown: () =
 
   useEffect(() => {
     const totalSeconds = data[currentIndex].seconds;
-    if (activeCountdown >= totalSeconds) {
+    if (activeCountdown >= totalSeconds + 1) { // Adding 1 extra second
       if (currentIndex < data.length - 1) {
         setCurrentIndex(currentIndex + 1);
         resetActiveCountdown();
