@@ -25,3 +25,5 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ totalDuration, elapsedTime })
 }
 
 export default ProgressBar;
+
+
