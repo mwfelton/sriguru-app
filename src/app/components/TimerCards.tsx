@@ -36,9 +36,9 @@ const TimerCards: React.FC<{ activeCountdown: number; resetActiveCountdown: () =
             height={300} // Adjust width and height as needed
           />
           <div className="px-4 py-2">
-            <div className="font-bold text-lg mb-1">{data[currentIndex].name}</div>
-            <div className="text-2xl font-mono">
-              {getElapsedSecondsInTimeFormat(data[currentIndex].seconds, activeCountdown)}
+            <div className="flex justify-between font-bold text-lg mb-1">
+              {data[currentIndex].name}
+              <h1>{getElapsedSecondsInTimeFormat(data[currentIndex].seconds, activeCountdown)}</h1> 
             </div>
             <ProgressBar
               totalDuration={data[currentIndex].seconds}

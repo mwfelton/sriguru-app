@@ -40,7 +40,7 @@ export default function PracticeTimer() {
           </div>
           <div className='flex flex-col items-center bg-seashell mt-1 py-5 px-2 rounded'>
             <h1 className='text-lg text-crystal_blue'>Kriya Practice Guide</h1>
-            <p className="text-justify my-2 px-2">Use this guide to help you keep the correct timing for your Kriya. The timer is customizable for certain parts of the Kriya but the most important parts are set to help you keep on track.</p>
+            <p className="text-justify my-2 px-2">Use this guide to help you keep the correct timing for your Kriya. The timer is customisable for certain parts of the Kriya but the most important parts are set to help you keep on track.</p>
           </div>
         </>
       )}
