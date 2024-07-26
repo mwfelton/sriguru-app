@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ProgressBar from '../components/ProgressBar';
 import data from '../kriya.json';
+import Timer from '../components/Timer'
 
 const TimerCards: React.FC<{ activeCountdown: number; resetActiveCountdown: () => void }> = ({ activeCountdown, resetActiveCountdown }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,8 +28,11 @@ const TimerCards: React.FC<{ activeCountdown: number; resetActiveCountdown: () =
             height={300} // Adjust width and height as needed
           />
           <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{data[currentIndex].name}</div>
-            <h1>{currentIndex}</h1>
+            <div className=" flex justify-between font-bold text-xl mb-2">
+              {data[currentIndex].name}
+              <h1>egg</h1>
+            </div>
+
             <ProgressBar
               totalDuration={data[currentIndex].seconds}
               elapsedTime={activeCountdown}

@@ -6,24 +6,24 @@ import KriyaTimerHero from '../../../../public/images/kriya-timer-hero.png';
 
 export default function PracticeTimer() {
   const [activeCountdown, setActiveCountdown] = useState(0);
-  const [startKriya, setStartKriya] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
 
-  const handleStartKriya = () => {
-    setStartKriya(!startKriya); // Toggle startKriya state
+  const handleStartPauseKriya = () => {
+    setIsRunning(prev => !prev);
   };
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null;
-    if (startKriya) {
+    if (isRunning) {
       intervalId = setInterval(() => {
         setActiveCountdown(prev => prev + 1);
       }, 1000);
-
-      return () => {
-        if (intervalId) clearInterval(intervalId);
-      };
     }
-  }, [startKriya]);
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [isRunning]);
 
   const resetActiveCountdown = () => {
     setActiveCountdown(0);
@@ -31,7 +31,7 @@ export default function PracticeTimer() {
 
   return (
     <main className="flex min-h-screen flex-col items-center px-12 py-5">
-      {!startKriya && (
+      {!isRunning && activeCountdown === 0 && (
         <>
           <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
             <Image
@@ -45,23 +45,21 @@ export default function PracticeTimer() {
         </>
       )}
 
-      {!startKriya && (
-        <div className='flex w-full flex-col items-center bg-crystal_blue rounded my-4'>
-          <button 
-            className='px-4 py-2 m-2 text-seashell text-center'
-            onClick={handleStartKriya}
-          >
-            Start your Kriya
-          </button>
-        </div>
-      )}
-
-      {startKriya && (
+      {isRunning || activeCountdown > 0 ? (
         <TimerCards
           activeCountdown={activeCountdown}
           resetActiveCountdown={resetActiveCountdown}
         />
-      )}
+      ) : null}
+
+      <div className='flex w-full flex-col items-center bg-crystal_blue rounded my-4'>
+        <button 
+          className='px-4 py-2 m-2 text-seashell text-center'
+          onClick={handleStartPauseKriya}
+        >
+          {isRunning ? "Pause Kriya" : "Start your Kriya"}
+        </button>
+      </div>
     </main>
   );
 }
