@@ -12,7 +12,7 @@ export default function Home() {
           <div className='max-w-screen-lg px-12 py-5 mx-auto flex flex-col justify-center w-full h-full'>
             <div className='grid sm:grid-cols-1 md:grid-cols-3 gap-8 sm:px-5'>
               {/* card itself */}
-              <Link href={'/pages/practice-timer'}>
+              <Link href={'/practice-timer'}>
                 <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
                   <Image
                     src={KriyaTimerImage}
@@ -28,7 +28,7 @@ export default function Home() {
                 </div>
               </Link>
               {/* card itself */}
-              <Link href={'/pages/practice-tracker'}>
+              <Link href={'/practice-tracker'}>
                 <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
                   <Image
                     src={TrackerImage}
@@ -44,7 +44,7 @@ export default function Home() {
                 </div>
               </Link>
               {/* card itself */}
-              <Link href={'/pages/learn-online'}>
+              <Link href={'/learn-online'}>
                 <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
                   <Image
                     src={LearnYogaImage}

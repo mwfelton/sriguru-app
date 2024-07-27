@@ -1,8 +1,9 @@
 "use client";
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import TimerCards from "../../components/TimerCards";
+import TimerCards from "../components/TimerCards";
 import Image from "next/image";
-import KriyaTimerHero from '../../../../public/images/kriya-timer-hero.png';
+import KriyaTimerHero from '../../../public/images/kriya-timer-hero.png';
 
 export default function PracticeTimer() {
   const [activeCountdown, setActiveCountdown] = useState(0);
@@ -59,6 +60,16 @@ export default function PracticeTimer() {
         >
           {isRunning ? "Pause Kriya" : "Start your Kriya"}
         </button>
+      </div>
+
+      <div className='flex w-full flex-col items-center bg-crystal_blue rounded my-4'>
+        <Link href="/manage-kriya">
+          <button 
+            className='px-4 py-2 m-2 text-seashell text-center'
+          >
+            Manage your Kriya
+          </button>
+        </Link>
       </div>
     </main>
   );

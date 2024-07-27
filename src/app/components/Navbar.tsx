@@ -26,24 +26,24 @@ const Navbar = () => {
           </Link>
           <div className="flex items-center">
           <ul className="hidden md:flex">
-            <Link href='/pages/learn-online'>
+            <Link href='/learn-online'>
               <li className="ml-10 uppercase hover:border-b text-xl">
                 Learn
               </li>
             </Link>
-            <Link href='/pages/practice-tracker'>
+            <Link href='/practice-tracker'>
               <li className="ml-10 uppercase hover:border-b text-xl">
                 Practice Tracker
               </li>
             </Link>
-            <Link href='/pages/practice-timer'>
+            <Link href='/practice-timer'>
               <li className="ml-10 uppercase hover:border-b text-xl">
                 Kriya Timer
               </li>
             </Link>
           </ul>
           <div className="cursor-pointer pl-10">
-            <Link href='/pages/user-page'>
+            <Link href='/user-page'>
             <FaRegCircleUser size={40} className="text-seashell" />
             </Link>
           </div>
