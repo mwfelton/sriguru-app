@@ -6,9 +6,9 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ totalDuration, elapsedTime }) => {
-  const percentage = (elapsedTime / totalDuration) * 100;
-  console.log(elapsedTime)
-  console.log(totalDuration)
+  // Decrease totalDuration by 1 second to speed up the progress bar
+  const adjustedTotalDuration = totalDuration - 1;
+  const percentage = (elapsedTime / adjustedTotalDuration) * 100;
 
   return (
     <div className='my-5'>
@@ -27,5 +27,3 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ totalDuration, elapsedTime })
 }
 
 export default ProgressBar;
-
-
