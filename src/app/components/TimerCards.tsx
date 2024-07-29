@@ -2,15 +2,22 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ProgressBar from '../components/ProgressBar';
 import data from '../kriya.json';
+import useSound from 'use-sound';
 
 const TimerCards: React.FC<{ activeCountdown: number; resetActiveCountdown: () => void }> = ({ activeCountdown, resetActiveCountdown }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const [play, { stop }] = useSound(
+    '/temple-bell.mp3',
+    { volume: 0.5 }
+  );
 
   useEffect(() => {
     const totalSeconds = data[currentIndex].seconds;
     if (activeCountdown >= totalSeconds + 1) { // Adding 1 extra second
       if (currentIndex < data.length - 1) {
         setCurrentIndex(currentIndex + 1);
+        play();
         resetActiveCountdown();
       }
     }
