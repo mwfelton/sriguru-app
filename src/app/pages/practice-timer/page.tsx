@@ -1,9 +1,7 @@
-Practice timer page
-
 "use client";
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import TimerCards from "../components/TimerCards";
+import TimerCards from "../../components/TimerCards";
 import Image from "next/image";
 import KriyaTimerHero from '../../../public/images/kriya-timer-hero.png';
 

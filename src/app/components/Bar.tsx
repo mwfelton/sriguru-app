@@ -30,7 +30,7 @@ interface BarProps {
   resetActiveCountdown: boolean;
 }
 
-const Bar = ({ activeCountdown, resetActiveCountdown }: BarProps) => {
+const Bar = () => {
 
   const [elements, setElements] = useState(initialElements);
 
