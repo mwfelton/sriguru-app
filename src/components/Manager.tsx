@@ -1,7 +1,7 @@
 import React from "react";
 import { PiFlowerLotusLight } from "react-icons/pi";
 import { useState, useEffect } from "react";
-import data from '../kriya.json';
+import data from '../app/kriya.json';
 
 const Manager = () => {
   return (

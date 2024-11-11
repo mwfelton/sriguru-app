@@ -1,5 +1,5 @@
 import React from 'react'
-import Manager from "../components/Manager";
+import Manager from "../../components/Manager";
  
 
 export default function ManageKriya() {

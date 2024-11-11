@@ -1,7 +1,7 @@
 "use client"
 import Link from 'next/link';
 import Image from 'next/image';
-import Logo from '../../../public/images/nav-logo.png'
+import Logo from '../../public/images/nav-logo.png'
 import React, { useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 

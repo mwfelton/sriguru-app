@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-// import { Sen } from "next/font/google";
+import ClientLayout from '../app/ClientLayout';  
 import "./globals.css";
-import Navbar from './components/Navbar'
 
-// const sen = Sen({ 
-//   subsets: ["latin"]
-// });
 export const metadata: Metadata = {
   manifest: "/manifest.json",
   title: "Create Next App",
@@ -36,12 +32,8 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/favicon.ico" />
       </head>
-      {/* <body className={sen.className}> */}
       <body>
-        <Navbar />
-        <main className="pt-24 bg-platinum">
-         {children}
-        </main>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
