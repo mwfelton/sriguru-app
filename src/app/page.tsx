@@ -3,6 +3,7 @@ import Link from 'next/link';
 import TrackerImage from '../../public/images/practice-tracker.png'
 import LearnYogaImage from '../../public/images/learn-yoga.png'
 import KriyaTimerImage from '../../public/images/kriya-timer.png'
+import SignUpImage from '../../public/images/sign-up-page.jpg'
 
 export default function Home() {
   return (
@@ -55,6 +56,21 @@ export default function Home() {
                   <div className='flex items-center justify-center bg-crystal_blue'>
                     <button className='px-2 m-4 text-seashell'>
                       Learn practices online
+                    </button>
+                  </div>
+                </div>
+              </Link>
+              <Link href={'/sign-in'}>
+                <div className='shadow-md shadow-gray-600 rounded-lg overflow-hidden'>
+                  <Image
+                    src={SignUpImage}
+                    alt='logo'
+                    className="cursor-pointer"
+                    priority
+                  />
+                  <div className='flex items-center justify-center bg-crystal_blue'>
+                    <button className='px-2 m-4 text-seashell'>
+                      Sign In / Register
                     </button>
                   </div>
                 </div>
