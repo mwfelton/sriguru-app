@@ -1,3 +1,4 @@
+import { useSession} from "next-auth/react"
 import Image from "next/image";
 import Link from 'next/link';
 import TrackerImage from '../../public/images/practice-tracker.png'
@@ -6,6 +7,8 @@ import KriyaTimerImage from '../../public/images/kriya-timer.png'
 import SignUpImage from '../../public/images/sign-up-page.jpg'
 
 export default function Home() {
+  const { data: session } = useSession()
+
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div className="px-2">

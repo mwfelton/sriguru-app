@@ -1,4 +1,5 @@
 "use client"
+import { useSession } from "next-auth/react"
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from '../../public/images/nav-logo.png'
@@ -6,6 +7,7 @@ import React, { useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 
 const Navbar = () => {
+  const { data: session } = useSession()
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleNav = () => {
@@ -43,9 +45,17 @@ const Navbar = () => {
             </Link>
           </ul>
           <div className="cursor-pointer pl-10">
-            <Link href='/user-page'>
-            <FaRegCircleUser size={40} className="text-seashell" />
-            </Link>
+            {session ? (
+              <Link href="/user-page">
+                <FaRegCircleUser size={40} className="text-seashell" />
+              </Link>
+            ) : (
+              <Link href="/sign-in">
+                <li className="ml-10 uppercase hover:border-b text-xl">
+                  Log in
+                </li>
+              </Link>
+            )}
           </div>
         </div>
       </div>
