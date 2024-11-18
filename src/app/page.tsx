@@ -1,3 +1,5 @@
+"use client"; // This marks the file as a Client Component
+
 import { useSession} from "next-auth/react"
 import Image from "next/image";
 import Link from 'next/link';
