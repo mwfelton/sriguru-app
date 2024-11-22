@@ -1,14 +1,13 @@
-// app/api/auth/[...nextauth].ts
 import NextAuth from "next-auth";
 import CognitoProvider from "next-auth/providers/cognito";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 
-export default NextAuth({
+const handler = NextAuth({
   providers: [
     CognitoProvider({
-      clientId: process.env.COGNITO_CLIENT_ID,
+      clientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID,
       issuer: `https://cognito-idp.${process.env.COGNITO_REGION}.amazonaws.com/${process.env.COGNITO_USER_POOL_ID}`,
     } as any),
     CredentialsProvider({
@@ -24,8 +23,8 @@ export default NextAuth({
         }
 
         const userPool = new CognitoUserPool({
-          UserPoolId: process.env.COGNITO_USER_POOL_ID as string,
-          ClientId: process.env.COGNITO_CLIENT_ID as string,
+          UserPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID as string,
+          ClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID as string,
         });
 
         const cognitoUser = new CognitoUser({
@@ -45,7 +44,7 @@ export default NextAuth({
               resolve({
                 id: session.getIdToken().payload.sub,
                 email: credentials.email,
-                idToken, // `idToken` will now be recognized thanks to type extension
+                idToken,
               });
             },
             onFailure: (err) => reject(err),
@@ -60,13 +59,17 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user?.idToken) {
-        token.id_token = user.idToken; // Store id_token in JWT
+        token.id_token = user.idToken;
       }
       return token;
     },
     async session({ session, token }) {
-      session.id_token = token.id_token; // Attach id_token to the session
+      session.id_token = token.id_token;
       return session;
     },
   },
 });
+
+// Named export for the POST method
+export { handler as GET, handler as POST }
+

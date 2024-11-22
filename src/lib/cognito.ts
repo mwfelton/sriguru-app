@@ -1,15 +1,23 @@
 // src/lib/cognito.ts
-import { CognitoUserPool, CognitoUser, AuthenticationDetails, ISignUpResult } from "amazon-cognito-identity-js";
+import { CognitoUserPool, CognitoUser, CognitoUserAttribute, AuthenticationDetails, ISignUpResult } from "amazon-cognito-identity-js";
 
-const userPool = new CognitoUserPool({
-  UserPoolId: process.env.COGNITO_USER_POOL_ID as string,
-  ClientId: process.env.COGNITO_CLIENT_ID as string,
+export const userPool = new CognitoUserPool({
+  UserPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID as string,
+  ClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID as string,
 });
 
+// if (!userPool.UserPoolId || !userPool.ClientId) {
+//   throw new Error('Both UserPoolId and ClientId are required.');
+// }
+
 // Function to register a new user
-export async function registerUser(email: string, password: string): Promise<ISignUpResult> {
+export async function registerUser(email: string, password: string, username: string): Promise<ISignUpResult> {
   return new Promise((resolve, reject) => {
-    userPool.signUp(email, password, [], [], (err, result) => {
+    const attributes = [
+      new CognitoUserAttribute({ Name: "email", Value: email })
+    ];
+    
+    userPool.signUp(username, password, attributes, [], (err, result) => {
       if (err) {
         reject(err);
       } else if (result) {

@@ -26,6 +26,12 @@ export default function SignUp() {
     e.preventDefault();
     setError(null);
 
+     // Validate that username is not an email
+    if (formData.username.includes("@")) {
+      setError("Username cannot be an email address.");
+      return;
+    }
+
     try {
       // Register user with the username, email, and password
       await registerUser(formData.email, formData.password, formData.username);
@@ -51,7 +57,7 @@ export default function SignUp() {
           {success ? (
             <p className="text-center text-green-600">Account created successfully!</p>
           ) : (
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" method="POST" onSubmit={handleSubmit}>
               {/* Username Input Field */}
               <div>
                 <label htmlFor="username" className="block text-sm font-medium text-gray-900">
