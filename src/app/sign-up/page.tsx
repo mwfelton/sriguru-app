@@ -2,16 +2,14 @@
 import React, { useState } from 'react';
 import { registerUser } from '@/lib/cognito'; // Adjust this import path if needed
 import { useRouter } from 'next/navigation'; // Adjusted import for app directory
+import { validateForm } from '../../lib/validation';
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({
-    username: '', // Change name to username
-    email: '',
-    password: '',
-  });
-
+  const [formData, setFormData] = useState({username: '', email: '', password: ''});
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<string | null>(null);  // Separate state for email error
+  const [passwordError, setPasswordError] = useState<string | null>(null);  // Separate state for password error
+  
 
   const router = useRouter(); // Initialize useRouter
 
@@ -22,22 +20,29 @@ export default function SignUp() {
     });
   };
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const formValidations = validateForm(formData);
+    if (formValidations?.email !== null) {
+      setEmailError(formValidations?.email || null);
+    } else if (formValidations?.password !== null) {
+      setPasswordError(formValidations?.password || null);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-     // Validate that username is not an email
-    if (formData.username.includes("@")) {
-      setError("Username cannot be an email address.");
-      return;
+    const formValidations = validateForm(formData);
+    setEmailError(formValidations?.email || null);
+    setPasswordError(formValidations?.password || null);
+    if (formValidations) {
+      return; // Prevent form submission if there are validation errors
     }
-
+    
     try {
-      // Register user with the username, email, and password
       await registerUser(formData.email, formData.password, formData.username);
-      setSuccess(true);
-
-      // Redirect to dashboard after successful sign-up
       router.push("/dashboard"); // Navigate to the dashboard page
     } catch (err) {
       setError('Error creating account. Please try again.');
@@ -54,10 +59,7 @@ export default function SignUp() {
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          {success ? (
-            <p className="text-center text-green-600">Account created successfully!</p>
-          ) : (
-            <form className="space-y-6" method="POST" onSubmit={handleSubmit}>
+            <form noValidate className="space-y-6" method="POST" onSubmit={handleSubmit}>
               {/* Username Input Field */}
               <div>
                 <label htmlFor="username" className="block text-sm font-medium text-gray-900">
@@ -76,7 +78,6 @@ export default function SignUp() {
                   />
                 </div>
               </div>
-
               {/* Email Input Field */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-900">
@@ -91,10 +92,12 @@ export default function SignUp() {
                     required
                     value={formData.email}
                     onChange={handleChange}
+                    onBlur={handleBlur} // Trigger validation on blur
                     className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
                   />
                 </div>
               </div>
+              {emailError && <p className="mt-2 text-red-600">{emailError}</p>}
 
               {/* Password Input Field */}
               <div>
@@ -106,14 +109,15 @@ export default function SignUp() {
                     id="password"
                     name="password"
                     type="password"
-                    autoComplete="current-password"
                     required
                     value={formData.password}
                     onChange={handleChange}
+                    onBlur={handleBlur} // Trigger validation on blur
                     className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
                   />
                 </div>
               </div>
+              {passwordError && <p className="mt-2 text-red-600">{passwordError}</p>}
 
               {/* Submit Button */}
               <div>
@@ -125,7 +129,7 @@ export default function SignUp() {
                 </button>
               </div>
             </form>
-          )}
+          
           {error && <p className="mt-4 text-center text-red-600">{error}</p>}
         </div>
       </div>
