@@ -19,8 +19,11 @@ const handler = NextAuth({
       },
       authorize: async (credentials) => {
         if (!credentials || !credentials.email || !credentials.password) {
+          console.error("Authorize called without email or password:", credentials);
           throw new Error("Email and password are required");
         }
+
+        console.log("Authorize received email:", credentials.email);
 
         const userPool = new CognitoUserPool({
           UserPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID as string,
@@ -47,7 +50,10 @@ const handler = NextAuth({
                 idToken,
               });
             },
-            onFailure: (err) => reject(err),
+            onFailure: (err) => {
+              console.error("Cognito authentication failed:", err.message);
+              reject(new Error("Invalid email or password"));
+            },
           });
         });
       },
@@ -68,6 +74,7 @@ const handler = NextAuth({
       return session;
     },
   },
+  debug: true
 });
 
 // Named export for the POST method
