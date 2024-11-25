@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../public/images/nav-logo.png";
@@ -9,6 +9,8 @@ import { FaRegCircleUser } from "react-icons/fa6";
 const Navbar = () => {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  console.log('BANANA', session)
 
   const handleNav = () => {
     setMenuOpen(!menuOpen);
@@ -44,9 +46,16 @@ const Navbar = () => {
           </ul>
           <div className="cursor-pointer pl-10">
             {session ? (
-              <Link href="/dashboard">
-                <FaRegCircleUser size={40} className="text-seashell" />
-              </Link>
+              <div className="flex list-none gap-4">
+                <Link href="/dashboard">
+                  <FaRegCircleUser size={40} className="text-seashell" />
+                </Link>
+                <Link href="/">
+                  <button onClick={() => signOut()} className="bg-seashell hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                    Sign out
+                  </button>
+                </Link>
+              </div>
             ) : (
               <div className="flex list-none gap-4">
                 <Link href="/sign-in">
