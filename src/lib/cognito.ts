@@ -6,10 +6,6 @@ export const userPool = new CognitoUserPool({
   ClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID as string,
 });
 
-// if (!userPool.UserPoolId || !userPool.ClientId) {
-//   throw new Error('Both UserPoolId and ClientId are required.');
-// }
-
 // Function to register a new user
 export async function registerUser(email: string, password: string, username: string): Promise<ISignUpResult> {
   return new Promise((resolve, reject) => {
@@ -48,3 +44,20 @@ export async function authenticateUser(email: string, password: string): Promise
     });
   });
 }
+
+export const confirmSignUp = (email: string, code: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const user = new CognitoUser({
+      Username: email,
+      Pool: userPool,
+    });
+
+    user.confirmRegistration(code, false, (err, result) => {
+      if (err) {
+        reject(err.message || JSON.stringify(err));
+      } else {
+        resolve(result || "Sign-up confirmed successfully");
+      }
+    });
+  });
+};

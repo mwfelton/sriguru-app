@@ -1,6 +1,6 @@
 'use client'; // Ensure client-side rendering for form handling
 import React, { useState } from 'react';
-import { registerUser } from '@/lib/cognito'; // Adjust this import path if needed
+import { registerUser, confirmSignUp } from '@/lib/cognito';
 import { useRouter } from 'next/navigation'; // Adjusted import for app directory
 import { validateForm } from '../../lib/validation';
 
@@ -9,6 +9,9 @@ export default function SignUp() {
   const [error, setError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);  // Separate state for email error
   const [passwordError, setPasswordError] = useState<string | null>(null);  // Separate state for password error
+  const [verificationStep, setVerificationStep] = useState(false); // Track signup status
+  const [verificationCode, setVerificationCode] = useState(''); // State for verification code
+
   
 
   const router = useRouter(); // Initialize useRouter
@@ -43,9 +46,20 @@ export default function SignUp() {
     
     try {
       await registerUser(formData.email, formData.password, formData.username);
-      router.push("/dashboard"); // Navigate to the dashboard page
+      setVerificationStep(true); // Show the verification form
     } catch (err) {
       setError('Error creating account. Please try again.');
+      console.error(err);
+    }
+  };
+
+  const handleVerify = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await confirmSignUp(formData.username, verificationCode);
+      router.push('/dashboard'); // Navigate to the dashboard
+    } catch (err) {
+      setError('Verification failed. Please check the code or try again.');
       console.error(err);
     }
   };
@@ -55,12 +69,13 @@ export default function SignUp() {
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
-            Create an Account to start tracking your Sadhana
+            {verificationStep ? 'Verify Your Account' : 'Create an Account to start tracking your Sadhana'}
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          {!verificationStep ? (
             <form noValidate className="space-y-6" method="POST" onSubmit={handleSubmit}>
-              {/* Username Input Field */}
+              {/* Username Input */}
               <div>
                 <label htmlFor="username" className="block text-sm font-medium text-gray-900">
                   Username
@@ -74,11 +89,11 @@ export default function SignUp() {
                     required
                     value={formData.username}
                     onChange={handleChange}
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm"
                   />
                 </div>
               </div>
-              {/* Email Input Field */}
+              {/* Email Input */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-900">
                   Email address
@@ -92,14 +107,13 @@ export default function SignUp() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    onBlur={handleBlur} // Trigger validation on blur
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                    onBlur={handleBlur}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm"
                   />
                 </div>
+                {emailError && <p className="mt-2 text-red-600">{emailError}</p>}
               </div>
-              {emailError && <p className="mt-2 text-red-600">{emailError}</p>}
-
-              {/* Password Input Field */}
+              {/* Password Input */}
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-900">
                   Password
@@ -112,24 +126,49 @@ export default function SignUp() {
                     required
                     value={formData.password}
                     onChange={handleChange}
-                    onBlur={handleBlur} // Trigger validation on blur
-                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                    onBlur={handleBlur}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm"
                   />
                 </div>
+                {passwordError && <p className="mt-2 text-red-600">{passwordError}</p>}
               </div>
-              {passwordError && <p className="mt-2 text-red-600">{passwordError}</p>}
-
-              {/* Submit Button */}
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm"
                 >
                   Register
                 </button>
               </div>
             </form>
-          
+          ) : (
+            <form onSubmit={handleVerify} className="space-y-6">
+              <div>
+                <label htmlFor="verificationCode" className="block text-sm font-medium text-gray-900">
+                  Verification Code
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="verificationCode"
+                    name="verificationCode"
+                    type="text"
+                    required
+                    value={verificationCode}
+                    onChange={(e) => setVerificationCode(e.target.value)}
+                    className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm"
+                  />
+                </div>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm"
+                >
+                  Verify Account
+                </button>
+              </div>
+            </form>
+          )}
           {error && <p className="mt-4 text-center text-red-600">{error}</p>}
         </div>
       </div>
