@@ -1,5 +1,5 @@
 const isValidPassword = (password: string): boolean => {
-  const passwordRegex = /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+  const passwordRegex = /^.{6,}$/; // Matches any string with 6 or more characters
   return passwordRegex.test(password);
 };
 
@@ -13,7 +13,7 @@ export const validateForm = (formData: { email: string; password: string }) => {
 
   // Validate password
   if (!isValidPassword(formData.password)) {
-    validationErrors.password = "Password must be at least 6 characters, contain a number, and a special character.";
+    validationErrors.password = "Password must be at least 6 characters";
   }
 
   // Validate email
