@@ -10,8 +10,6 @@ const Navbar = () => {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  console.log('BANANA', session)
-
   const handleNav = () => {
     setMenuOpen(!menuOpen);
   };
