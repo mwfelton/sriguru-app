@@ -1,12 +1,23 @@
-"use client"; // This marks the file as a Client Component
+"use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // UPDATED: Added useEffect
+import Cookies from "js-cookie"; // NEW: Import for cookie handling
+import { useRouter } from "next/navigation"; // NEW: Import useRouter
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [code, setCode] = useState(''); // Input for verification code
+  const [code, setCode] = useState(''); 
+  const [email, setEmail] = useState(''); // NEW: State for email
   const [error, setError] = useState('');
+  const router = useRouter(); // NEW: useRouter hook to handle redirection
+
+  useEffect(() => {
+    const userEmail = Cookies.get('userEmail'); // NEW: Retrieve the email from the cookie
+    if (userEmail) {
+      setEmail(userEmail); // Set the email state
+    }
+  }, []); // Dependency array ensures this runs only once
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,12 +29,13 @@ const ResetPassword = () => {
       const response = await fetch('/api/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password, code }),
+        body: JSON.stringify({ password, code, email }), // UPDATED: Included email in the request
       });
 
       if (response.ok) {
         alert('Password reset successfully!');
-        // Redirect to login or dashboard
+        Cookies.remove('userEmail'); // NEW: Clear the email cookie after success
+        router.push('/dashboard'); // NEW: Redirect to the dashboard
       } else {
         const data = await response.json();
         setError(data.error || 'Failed to reset password. Please try again.');
