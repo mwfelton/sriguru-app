@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import ProgressBar from '../components/ProgressBar';
-import data from '../kriya.json';
+import ProgressBar from './ProgressBar';
+import data from '../app/kriya.json';
 import useSound from 'use-sound';
 
 const TimerCards: React.FC<{ activeCountdown: number; resetActiveCountdown: () => void }> = ({ activeCountdown, resetActiveCountdown }) => {
