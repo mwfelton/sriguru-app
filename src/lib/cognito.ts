@@ -25,26 +25,6 @@ export async function registerUser(email: string, password: string, username: st
   });
 }
 
-// Function to authenticate an existing user
-export async function authenticateUser(email: string, password: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const cognitoUser = new CognitoUser({
-      Username: email,
-      Pool: userPool,
-    });
-
-    const authenticationDetails = new AuthenticationDetails({
-      Username: email,
-      Password: password,
-    });
-
-    cognitoUser.authenticateUser(authenticationDetails, {
-      onSuccess: (session) => resolve(session.getIdToken().getJwtToken()),
-      onFailure: (err) => reject(err),
-    });
-  });
-}
-
 export const confirmSignUp = (email: string, code: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     const user = new CognitoUser({
@@ -58,6 +38,55 @@ export const confirmSignUp = (email: string, code: string): Promise<string> => {
       } else {
         resolve(result || "Sign-up confirmed successfully");
       }
+    });
+  });
+};
+
+export const resendVerificationCode = (email: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const cognitoUser = new CognitoUser({
+      Username: email,
+      Pool: userPool,
+    });
+
+    cognitoUser.resendConfirmationCode((err, result) => {
+      if (err) {
+        reject(err.message || JSON.stringify(err));
+      } else {
+        resolve("A new verification code has been sent to your email.");
+      }
+    });
+  });
+};
+
+export const forgotPassword = (email: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const user = new CognitoUser({
+      Username: email,
+      Pool: userPool,
+    });
+
+    user.forgotPassword({
+      onSuccess: (data) => {
+        resolve("Password reset link sent successfully!");
+      },
+      onFailure: (err) => {
+        reject(err.message || JSON.stringify(err));
+      },
+    });
+  });
+};
+
+export const confirmForgotPassword = (email: string, password: string, code: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const user = new CognitoUser({
+      Username: email,
+      Pool: userPool, // This ensures the pool information is provided
+    });
+
+    user.confirmPassword(code, password, {
+      onSuccess: () => resolve(),
+      onFailure: (err) => reject(err.message || JSON.stringify(err)),
     });
   });
 };
