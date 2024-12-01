@@ -1,6 +1,7 @@
 'use client'; // Ensure client-side rendering for form handling
 import React, { useState } from 'react';
-import { registerUser, confirmSignUp } from '@/lib/cognito';
+import { signIn } from "next-auth/react";
+import { registerUser, confirmSignUp, resendVerificationCode } from '@/lib/cognito';
 import { useRouter } from 'next/navigation'; // Adjusted import for app directory
 import { validateForm } from '../../lib/validation';
 
@@ -11,8 +12,6 @@ export default function SignUp() {
   const [passwordError, setPasswordError] = useState<string | null>(null);  // Separate state for password error
   const [verificationStep, setVerificationStep] = useState(false); // Track signup status
   const [verificationCode, setVerificationCode] = useState(''); // State for verification code
-
-  
 
   const router = useRouter(); // Initialize useRouter
 
@@ -47,9 +46,13 @@ export default function SignUp() {
     try {
       await registerUser(formData.email, formData.password, formData.username);
       setVerificationStep(true); // Show the verification form
-    } catch (err) {
-      setError('Error creating account. Please try again.');
-      console.error(err);
+    } catch (err: any) {
+      if (err?.code === "UsernameExistsException") {
+        setError("The username is already taken. Please choose a different one.");
+      } else {
+        setError("Error creating account. Please try again.");
+      }
+      console.error("Error during registration:", err);
     }
   };
 
@@ -57,12 +60,29 @@ export default function SignUp() {
     e.preventDefault();
     try {
       await confirmSignUp(formData.username, verificationCode);
+
+      await signIn("credentials", {
+        email: formData.username, // Assuming identifier is the email field
+        password: formData.password,
+        redirect: false, // Prevent default redirect to handle errors
+    });
+
       router.push('/dashboard'); // Navigate to the dashboard
     } catch (err) {
       setError('Verification failed. Please check the code or try again.');
       console.error(err);
     }
   };
+
+  const resendCode = async () => {
+    try {
+      const message = await resendVerificationCode(formData.username);
+      alert(message);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to resend the code. Please try again later.");
+    }
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -165,6 +185,13 @@ export default function SignUp() {
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm"
                 >
                   Verify Account
+                </button>
+                <button
+                  type="button"
+                  onClick={resendCode}
+                  className="mt-4 text-blue-500 hover:underline"
+                >
+                  Resend Code
                 </button>
               </div>
             </form>
