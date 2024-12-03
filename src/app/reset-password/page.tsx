@@ -1,31 +1,37 @@
-"use client"; // This marks the file as a Client Component
+"use client";
 
-import React, { useState } from "react";
+import React, { useState } from "react"; // UPDATED: Added useEffect
+import { useRouter } from "next/navigation"; // NEW: Import useRouter
+import { signIn } from "next-auth/react";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [code, setCode] = useState(''); // Input for verification code
+  const [code, setCode] = useState(''); 
+  const [email, setEmail] = useState(''); // NEW: State for email
   const [error, setError] = useState('');
+  const router = useRouter(); // NEW: useRouter hook to handle redirection
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
+
     try {
       const response = await fetch('/api/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password, code }),
+        body: JSON.stringify({ password, code }), 
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        alert('Password reset successfully!');
-        // Redirect to login or dashboard
+        router.push('/sign-in'); // Redirect to the dashboard
       } else {
-        const data = await response.json();
         setError(data.error || 'Failed to reset password. Please try again.');
       }
     } catch {
