@@ -1,0 +1,100 @@
+[
+  {
+    "name": "Sri Guru Mantra",
+    "seconds": 300,
+    "minutes": "5:00",
+    "minimum_value": "5:00",
+    "image": "/images/guru-mantra.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 120,
+    "minutes": "2:00",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Vishuddhi & Nabi Kriya",
+    "seconds": 120,
+    "minutes": "2:00",
+    "minimum_value": null,
+    "image": "/images/vis-nabi.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 120,
+    "minutes": "2:00",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Maha Mudra",
+    "seconds": 360,
+    "minutes": "6:00",
+    "minimum_value": null,
+    "image": "/images/mahamudra.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 120,
+    "minutes": "2:00",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Central Kriya Pranayam",
+    "seconds": 600,
+    "minutes": "10:00",
+    "minimum_value": "10:00",
+    "image": "/images/central-kriya.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 120,
+    "minutes": "2:00",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Bumble Bee",
+    "seconds": 240,
+    "minutes": "4:00",
+    "minimum_value": null,
+    "image": "/images/bumble.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 120,
+    "minutes": "2:00",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Chakra Dharana",
+    "seconds": 180,
+    "minutes": "3:00",
+    "minimum_value": null,
+    "image": "/images/chakra-d.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 120,
+    "minutes": "2:00",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  },
+  {
+    "name": "Bhastrika Kriya",
+    "seconds": 180,
+    "minutes": "3:00",
+    "minimum_value": null,
+    "image": "/images/bhastrika.png"
+  },
+  {
+    "name": "Sit Quietly",
+    "seconds": 300,
+    "minutes": "5:00",
+    "minimum_value": null,
+    "image": "/images/sit.png"
+  }
+]

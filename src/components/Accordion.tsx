@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import { useState } from "react";
-import Bar from "../components/Bar";
+import Bar from "./Bar";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
