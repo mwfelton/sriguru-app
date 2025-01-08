@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DynamoDBClient, BatchWriteItemCommand } from "@aws-sdk/client-dynamodb";
-import dynamoDbClient from "../../../lib/dynamodbClient"; // Adjust the path as needed
+import { BatchWriteItemCommand } from "@aws-sdk/client-dynamodb";
+import dynamoDbClient from "../../../lib/dynamodbClient";
 
 const TABLE_NAME = "YogaAppData";
 
