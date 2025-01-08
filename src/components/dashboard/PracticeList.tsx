@@ -12,10 +12,10 @@ export default function PracticeList() {
   console.log(practices)
 
   return (
-    <div>
-      <h1>Configure Your Practices</h1>
+    <div className="my-4">
+      <h1 className="py-4">Yoga Practices</h1>
         {practices.map((practice: any) => (
-          <div key={practice.dataType}>
+          <div key={practice.dataType} className="flex">
             <label>
               <input type="checkbox" value={practice.practiceName} />
               {practice.practiceName}
